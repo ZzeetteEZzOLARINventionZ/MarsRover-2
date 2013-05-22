@@ -43,8 +43,10 @@ Expected Output:
 
 ##Solution
 
-This is a classic problem about object "state". The "orientation" and "position" that the rovers is at is actually the rover's "state". The instructions, e.g. 'L' or 'M', initiate state transition for the rover. This solution is to maintain a "state machine" within each "MarsRover" object and the "state machine" changes its state every time a instruction is received. 
+This is a classic problem about object "state". The "orientation" and "position" that the rovers is at can be represented by the rover's "state". The instructions, e.g. 'L' or 'M', initiate state transition for the rover. 
 
-The `Plateau` class models the land/area on which the rover moves. It defines the concepts of "position" ('x' and 'y') and "orientation" (or direction). The `MarsRover` class models the actual rover which responds instructions. Each `MarsRover` instance is given a `Plateau` instance on which it moves. The `Plateau` instance will "remember" at which position the rover is currently stopped and the "MarsRover" instance itself keeps track of where its facing now.
+The solution is to maintain a "state machine" within each "MarsRover" object and the "state machine" changes its state every time a instruction is received. 
+
+The `Plateau` class models the land/area on which the rover moves. It defines the concepts of "position" ('x' and 'y' coordinates) and "orientation" (i.e. direction). The `MarsRover` class models the actual rover which responds to instructions. Each `MarsRover` instance is given a `Plateau` instance on which it moves. The `Plateau` instance will "remember" at which position the rover is currently stopped and the "MarsRover" instance itself keeps track of where its facing now.
 
 This implemenation doesn't include any code for processing the "input" file described in the problem statement. This is intentionally left out since it's not something important for this problem.
