@@ -1,4 +1,4 @@
-#MarsRover
+#MarsRover - The Simpler and Cleaner Implementation
 
 ##Problem
 
