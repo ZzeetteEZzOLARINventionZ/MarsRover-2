@@ -74,6 +74,15 @@ public class Plateau {
 		public int getY(){
 			return posY;
 		}
+
+		@Override
+		public boolean equals(Object obj){
+			if(!(obj instanceof Position))
+				return false;
+
+			Position p = (Position)obj;
+			return this.getX() == p.getX() && this.getY() == p.getY();
+		}
 	}
 
 	public static final int START_X = 0;
@@ -95,6 +104,10 @@ public class Plateau {
 	}
 
 	public Plateau setPosition(Position pos){
+		if(pos.getX() > this.getEdge().getX() || pos.getY() > this.getEdge().getY()){
+			throw new IllegalArgumentException("The supplied position is beyond this plateau!");
+		}
+
 		this.currentPos = pos;
 		return this;
 	}
