@@ -60,6 +60,9 @@ public class Plateau {
 		private int posY;
 
 		public Position(int x, int y){
+			if(x < START_X || y < START_Y)
+				throw new IllegalArgumentException("Position's coordinates can't be less than plateau's starting position!");
+
 			posX = x;
 			posY = y;
 		}
@@ -73,12 +76,22 @@ public class Plateau {
 		}
 	}
 
+	public static final int START_X = 0;
+	public static final int START_Y = 0;
+
 	private Position edge;
 	private Position currentPos;
 
 	public Plateau(int edgeX, int edgeY){
+		if(edgeX < START_X || edgeY < START_Y)
+			throw new IllegalArgumentException("Plateau's edge can't be less than its starting point at (" + START_X + "," + START_Y + ")!");
+
 		edge = new Position(edgeX, edgeY);
-		currentPos = new Position(0,0);
+		currentPos = new Position(START_X, START_Y);
+	}
+
+	public Position getEdge(){
+		return this.edge;
 	}
 
 	public Plateau setPosition(Position pos){
@@ -86,18 +99,30 @@ public class Plateau {
 		return this;
 	}
 
-	public Plateau newMovement(Orientation direction, int distance){
+	public Plateau newMovement(Orientation direction, int distance) throws PlateauException {
 		switch (direction) {
 			case NORTH:
+				if(currentPos.getY() + distance > getEdge().getY())
+					throw new PlateauException(this, "You are moving beyond the area of plateau!");
+
 				this.currentPos = new Position(currentPos.getX(), currentPos.getY() + distance);
 				break;
 			case EAST:
+				if(currentPos.getX() + distance > getEdge().getX())
+					throw new PlateauException(this, "You are moving beyond the area of plateau!");
+
 				this.currentPos = new Position(currentPos.getX() + distance, currentPos.getY());
 				break;
 			case SOUTH:
+				if(currentPos.getY() - distance < START_Y)
+					throw new PlateauException(this, "You are moving beyond the area of plateau!");
+
 				this.currentPos = new Position(currentPos.getX(), currentPos.getY() - distance);
 				break;
 			case WEST:
+				if(currentPos.getX() - distance < START_X)
+					throw new PlateauException(this, "You are moving beyond the area of plateau!");
+
 				this.currentPos = new Position(currentPos.getX() - distance, currentPos.getY());
 				break;
 			default:

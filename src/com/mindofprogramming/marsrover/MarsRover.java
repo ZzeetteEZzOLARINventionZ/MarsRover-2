@@ -10,7 +10,7 @@ public class MarsRover {
 		this.land.setPosition(initPos);
 	}
 
-	public MarsRover move(int distance){
+	public MarsRover move(int distance) throws PlateauException {
 		this.land.newMovement(this.currentOrientation,distance);
 		return this;
 	}
